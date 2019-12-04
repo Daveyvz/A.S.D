@@ -3,7 +3,7 @@ package View;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 
@@ -17,7 +17,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		Pane root = new MainScreen();
+		BorderPane root = new MainScreen();
 		Scene scene = new Scene(root, 700,700);
 		
 		primaryStage.setScene(scene);

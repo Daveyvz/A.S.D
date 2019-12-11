@@ -15,6 +15,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import View.MainScreen;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -74,6 +76,7 @@ public class FireDB {
 		
 	}
 	
+	// data voor als ene obstakel op een coordinaat is
 	public void ObStacleOnPos() {
 		
 		DatabaseReference ref = FirebaseDatabase.getInstance() // database reference nodig om het te gebruiken
@@ -82,6 +85,7 @@ public class FireDB {
 			@Override
 			public void onChildRemoved(DataSnapshot snapshot) {
 				// TODO Auto-generated method stub
+
 				
 			}
 			
@@ -94,6 +98,7 @@ public class FireDB {
 			@Override
 			public void onChildChanged(DataSnapshot snapshot, String previousChildName) {
 				// TODO Auto-generated method stub
+				
 				
 			}
 			
@@ -108,7 +113,7 @@ public class FireDB {
 				
 					Long lX = (Long) X;
 					Long lY = (Long) Y;
-					
+							
 					MainScreen.placeObstacleOn(lX, lY);
 				}else {
 					System.out.println("No obstacles found");
@@ -122,6 +127,64 @@ public class FireDB {
 				
 			}
 		});
+		
+	}
+	
+	// Data voor een obstakel die tussen twee coordinaten wordt gevonden
+	public void ObstacleBetweenPos(){
+		
+		DatabaseReference ref = FirebaseDatabase.getInstance() // database reference nodig om het te gebruiken
+			    .getReference();
+			ref.child("ObstacleBetweenXY").addChildEventListener(new ChildEventListener() {
+				@Override
+				public void onChildRemoved(DataSnapshot snapshot) {
+					// TODO Auto-generated method stub
+
+					
+				}
+				
+				@Override
+				public void onChildMoved(DataSnapshot snapshot, String previousChildName) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onChildChanged(DataSnapshot snapshot, String previousChildName) {
+					// TODO Auto-generated method stub
+					
+					
+				}
+				
+				// Obstacle on data
+				@Override
+				public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
+					// data retrieval
+					if(snapshot.exists()) {
+						
+						Object fromX = snapshot.child("FromX").getValue(); // X data
+						Object fromY = snapshot.child("FromY").getValue(); // Y data
+						Object toX = snapshot.child("ToX").getValue(); // X data
+						Object toY = snapshot.child("ToY").getValue(); // Y data
+					
+						Long lfromX = (Long) fromX;
+						Long lfromY = (Long) fromY;
+						Long ltoX = (Long) toX;
+						Long ltoY = (Long) toY;
+								
+						MainScreen.placeObstacleBetween(lfromX, lfromY, ltoX, ltoY);
+					}else {
+						System.out.println("No obstacles found");
+					}
+						
+				}
+				
+				@Override
+				public void onCancelled(DatabaseError error) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		
 	}
 	

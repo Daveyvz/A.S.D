@@ -11,10 +11,6 @@ import javafx.scene.web.WebView;
 
 import java.util.ArrayList;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-
 import Model.FireDB;
 
 /**

@@ -15,9 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import View.MainScreen;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 
 /**
  * 

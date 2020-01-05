@@ -14,7 +14,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import View.MainScreen;
+import Controller.Server;
+import View.CenterPane;
+import View.TopPane;
 
 /**
  * 
@@ -22,6 +24,8 @@ import View.MainScreen;
  *
  */
 public class FireDB {
+	
+	public static Server deskApp;
 	
 	public FireDB() {
 		
@@ -34,7 +38,7 @@ public class FireDB {
 				    .setDatabaseUrl("https://lijnvolger-20778.firebaseio.com/")
 				    .build();
 				FirebaseApp.initializeApp(options);
-								
+				
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,7 +64,13 @@ public class FireDB {
 				//data convert naar long omdat de database dat zo wilt
 				Long lX = (Long) X; 
 				Long lY = (Long) Y;
-				MainScreen.relocateRobot(lX, lY); // positie word visual geupdate
+				CenterPane.relocateRobot(lX, lY); // positie word visual geupdate
+				
+				try {
+					deskApp = new Server(5556);
+				}catch(Exception ex) {
+					ex.printStackTrace();
+				}	
 			
 			}
 			
@@ -111,7 +121,7 @@ public class FireDB {
 					Long lX = (Long) X;
 					Long lY = (Long) Y;
 							
-					MainScreen.placeObstacleOn(lX, lY);
+					CenterPane.placeObstacleOn(lX, lY);
 				}else {
 					System.out.println("No obstacles found");
 				}
@@ -169,7 +179,7 @@ public class FireDB {
 						Long ltoX = (Long) toX;
 						Long ltoY = (Long) toY;
 								
-						MainScreen.placeObstacleBetween(lfromX, lfromY, ltoX, ltoY);
+						CenterPane.placeObstacleBetween(lfromX, lfromY, ltoX, ltoY);
 					}else {
 						System.out.println("No obstacles found");
 					}

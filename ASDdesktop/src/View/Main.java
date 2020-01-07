@@ -1,5 +1,8 @@
 package View;
 
+import java.io.IOException;
+
+import Controller.Server;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -9,14 +12,16 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+				
+		launch(args);	
 		
-		launch(args);
 
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
+	
 		BorderPane root = new MainScreen();
 		Scene scene = new Scene(root, 700,700);
 		
@@ -24,6 +29,7 @@ public class Main extends Application {
 		primaryStage.setTitle("Boebot interface");
 		primaryStage.show();
 		
+				
 	}
 
 }

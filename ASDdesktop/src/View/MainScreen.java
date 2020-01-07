@@ -9,18 +9,37 @@ import javafx.scene.image.Image;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import java.util.ArrayList;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+
+import Model.FireDB;
+
+/**
+ * 
+ * @author nathaniel veldkamp
+ *
+ */
 public class MainScreen extends BorderPane {
 	//webview voor lokale server
 	WebView mWebView = new WebView();
 	WebEngine engine = mWebView.getEngine();
 	
 	//Pane voor route interface
-	Pane inter = new Pane();
-	
-	ImageView ivRobot;
+	static Pane inter = new Pane();
+	static ImageView ivRobot;
 
+	FireDB db = new FireDB();
+	
+	public static ArrayList<ImageView> ObOnArray = new ArrayList<>();
+	
 	public MainScreen() {
 		
+		db.CurrentPos();
+		//db.ObStacleOnPos();
+				
 		mWebView.setPrefSize(700, 200);
 		setTop(mWebView);
 		
@@ -35,7 +54,7 @@ public class MainScreen extends BorderPane {
 		ivRobot = new ImageView(imgRobot);
 		ivRobot.setFitHeight(30);
 		ivRobot.setFitWidth(30);
-		relocateRobot(0,0);
+				
 		inter.getChildren().add(ivGrid);
 		inter.getChildren().add(ivRobot);
 		
@@ -43,9 +62,9 @@ public class MainScreen extends BorderPane {
 
 	}
 
-	private void relocateRobot(int x, int y) {
+	//functie voor het updaten van de robot op de grid
+	public static void relocateRobot(long x, long y) {
 		// TODO Auto-generated method stub
-		
 		if(x > 8 || y > 8) {
 			ivRobot.relocate(106, 455);
 			System.out.println("xy values invalid");
@@ -54,7 +73,15 @@ public class MainScreen extends BorderPane {
 			System.out.println("xy values invalid");
 		}else {
 			ivRobot.relocate(106 + (x * 56), 455 - (y * 56));
+			System.out.println(ivRobot.getLayoutX() + " " + ivRobot.getLayoutY());
 		}
+		
+	}
+	
+	// functie voor een obstakel op de grid plaatsen wanneer de robot eentje vind op een xy
+	public static void placeObstacleOn(long x, long y) {	
+		
+		
 		
 	}
 	

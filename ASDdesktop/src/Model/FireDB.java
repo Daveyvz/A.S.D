@@ -19,7 +19,8 @@ import View.CenterPane;
 import View.TopPane;
 
 /**
- * 
+ * This class is for getting robot data from the database and showing the data on screen
+ *
  * @author nathaniel veldkamp
  *
  */
